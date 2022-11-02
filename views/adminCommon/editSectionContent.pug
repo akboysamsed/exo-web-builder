@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        
+    body
+        p.question Write your Section Content in Pug/Jade - 
+            b write carefully don't add extra spaces and use tab for indent otherwise your Section will not render and if the clicks not work then click on line number
+        .editor-container
+            #editor // Loading..
+        textarea#code.form-control(rows='5' name='sectionContent' style='display:none;')
+        #editor
+        a.btn.btn-primary.mx-3(href=`/admin/sections/update/${Id}`) Back
+
+        script.
+            console.log("working")
+            let id= `#{Id}`;
+            fetch(`${domain}/api/v1/getsection/${id}`).then((code)=>{
+                return code.json()
+            }).then((parsedCode)=>{
+                var aceEditor = ace.edit("editor");
+                let sectionContent = parsedCode.Section.sectionContent;
+                aceEditor.setValue(sectionContent, 1)
+                console.log(sectionContent)
+                })
+script(src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.5.3/ace.js')
+

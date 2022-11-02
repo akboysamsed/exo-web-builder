@@ -1,0 +1,27 @@
+doctype html
+html
+    head
+        
+    body
+        if (url="/admin/pages/update/editor")
+        
+            p.question Write your Page Content in Pug/Jade - 
+                b write carefully don't add extra spaces and use tab for indent otherwise your page will not render and if the clicks not work then click on line number
+            .editor-container
+                #editor // Loding..
+            textarea#code.form-control(rows='5' name='pageContent' style='display:none;')
+            #editor
+            button.btn.btn-primary.mx-3#cancel(type="button") Back
+        
+            script.
+                console.log("working2")
+                let id= `#{Id}`;
+                fetch(`${domain}/api/v1/getPage/${id}`).then((code)=>{
+                    return code.json()
+                }).then((parsedCode)=>{
+                    var aceEditor = ace.edit("editor");
+                    let pageContent = parsedCode.WebPages.pageContent;
+                    aceEditor.setValue(pageContent, 1)
+                    })
+script(src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.5.3/ace.js')
+

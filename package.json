@@ -1,0 +1,24 @@
+{
+  "name": "website-builder",
+  "version": "1.0.0",
+  "description": "This will help to build any bootstrap website whithin minutes.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./server.js",
+    "dev": "nodemon ./server.js"
+  },
+  "author": "Md Samsed Rayeen",
+  "license": "ISC",
+  "engines": {
+    "node": "16.17.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "hbs": "^4.2.0",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20",
+    "pug": "^3.0.2",
+    "request": "^2.88.2"
+  }
+}

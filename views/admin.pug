@@ -1,0 +1,52 @@
+extend adminLayout.pug
+block head
+  title Exo Web
+block content
+    .container-fluid
+      if(url == "/admin")
+        include ./adminCommon/dashboard.pug
+      else if(url == "/admin/pages/add-new")
+        include ./adminCommon/addNewPages.pug
+      else if(url == "/admin/pages/update")
+        include ./adminCommon/addNewPages.pug
+      else if(url == "/admin/pages/update/editor")
+        include ./adminCommon/addNewPages.pug
+      else if(url == "/admin/pages")
+        include ./adminCommon/adminPages.pug
+      else if(url == "/admin/pages/delete")
+        include ./adminCommon/adminDeletePage.pug
+      else if(url == "/admin/sections/add-new")
+        include ./adminCommon/addNewPages.pug
+      else if(url == "/admin/sections")
+        include ./adminCommon/adminSections
+      else if(url == "/admin/sections/update")
+        include ./adminCommon/addNewPages.pug
+      else if(url == "/admin/sections/update/editor")
+        include ./adminCommon/addNewPages.pug
+      else if(url == "/admin/sections/delete")
+        include ./adminCommon/adminDeleteSection.pug
+        script.
+          let delsBtn = document.getElementById("dels")
+          delsBtn.onclick =   ()=>{
+          fetch(`${domain}/api/v1/deletesection/${id}`,{ method: 'DELETE'}).then(()=>{
+          window.location = "/admin/sections"
+          })
+          }
+      else if(url == "/admin/routes")
+        form.form-controller(method="POST",action="/api/v1/updateroute")
+          .editor-container
+              #editor // Loding..
+          textarea#code.form-control(rows='5' name='code' style='display:none;')
+          #editor
+          button.btn.btn-primary.mx-3#cancel(type="submit") Update Route
+    
+        script.
+            console.log("working2")
+            fetch(`/api/v1/getroute`).then((code)=>{
+                return code.json()
+            }).then((parsedCode)=>{
+                var aceEditor = ace.edit("editor");
+                let code = parsedCode.Route.code;
+                aceEditor.setValue(code, 1)
+                })
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.5.3/ace.js')

@@ -1,0 +1,30 @@
+script.
+    let WebData;
+        fetch(`${domain}/api/v1/getsections`).then((Sections)=>{
+            return Sections.json()
+        }).then((Sections)=>{
+            WebData=Sections.getPageSection;
+            WebData.forEach((sections,index)=>{
+                let tableData = document.getElementById("tbody")
+       
+                tableData.innerHTML += `    <tr>
+                                            <th  class='align-middle' scope="row">${index+1}</th>
+                                            <td class='align-middle'>${sections.sectionName}</td>
+                                            <td class='align-middle'>${sections.fileName}</td>
+                                            <td class='align-middle'>
+                                            <a class="btn btn-success btn-sm align-middle" href="/admin/sections/update/${sections._id}" role="button"><i class="bi bi-pencil-square"></i></a>
+                                            <a class="btn btn-primary btn-sm align-middle" href="/admin/sections/delete/${sections._id}" role="button"><i class="bi bi-trash"></i></a>
+                                            </td>
+                                            </tr>`}
+            )
+             })
+table.table.table-striped.table-dark
+  thead
+    tr
+      th.align-middle(scope='col') #
+      th.align-middle(scope='col') Section Name
+      th.align-middle(scope='col') File Name
+      th(scope='col')
+        a.btn.btn-sm.btn-success(href="/admin/sections/add-new") Add 
+          i.bi.bi-plus-square-fill
+  tbody#tbody.align-middle

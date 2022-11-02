@@ -1,0 +1,113 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Add New Page
+body
+  .container-fluid.d-flex.flex-column.justify-content-center
+  if(url=="/admin/pages/add-new")
+    form.form-controller.form(method="POST",action="/api/v1/createpage")
+      .mb-3.container-
+        label.form-label(for='InputPageName') Page Name
+        input#pageName.form-control(name='pageName' , type="text")
+        label.form-label(for='InputFileName') File Name
+        input#fileName.form-control(name='fileName' , type="text")
+        label.form-label(for='InputPageContent') Page Content - After Page Add You Can Edit in editor
+        input#pageContent.form-control(name='pageContent' , value="h1 Hello World" , placeholder="Please Add Page First After Page Add You Can Edit" type="text")
+        button#addpages.btn.btn-success(type="submit") Add New Page
+  else if(url == "/admin/pages/update")
+    form.form-controller.form(method="POST",action=`/api/v1/updatepage/${Id}`)
+      .mb-3.container-
+        label.form-label(for='InputPageName') Page Name
+        input#pageName.form-control(name='pageName' , type="text")
+        label.form-label(for='InputFileName') File Name
+        input#fileName.form-control(name='fileName' , type="text")
+        label.form-label(for='InputFileName') Page Content
+        input#pageContent.form-control(name='pageContent' , style="pointer-events: none;" type="text")
+        a.btn.btn-light(href=`/admin/pages/update/editor/${Id}`) Edit Page Content in Editor
+        br
+        button#addpages.btn.btn-success(type="submit") Update Page
+    script.
+        let id= `#{Id}`;
+        fetch(`/api/v1/getPage/${id}`).then((code)=>{
+            return code.json()
+        }).then((parsedCode)=>{
+            let pageName = document.getElementById("pageName");
+            let fileName = document.getElementById("fileName");
+            let pageContent = document.getElementById("pageContent");
+            pageName.value = `${parsedCode.WebPages.pageName}`;
+            fileName.value = `${parsedCode.WebPages.fileName}`;
+            pageContent.value = `${parsedCode.WebPages.pageContent}`;
+        })
+  else if(url == "/admin/pages/update/editor")
+    form.form-controller.form(method="POST",action=`/api/v1/updatepage/${Id}`)
+      .mb-3.container-fluid
+        label.form-label(for='InputPageName') Page Name
+        input#pageName.form-control(name='pageName' ,style="pointer-events: none;", type="text")
+        label.form-label(for='InputFileName') File Name
+        input#fileName.form-control(name='fileName' ,style="pointer-events: none;", type="text")
+        include ./editPageContent
+        button#addpages.btn.btn-success(type="submit") Update Code
+    script.
+        let id= `#{Id}`;
+        fetch(`/api/v1/getPage/${id}`).then((code)=>{
+            return code.json()
+        }).then((parsedCode)=>{
+            let pageName = document.getElementById("pageName");
+            let fileName = document.getElementById("fileName");
+            let pageContent = document.getElementById("pageContent");
+            pageName.value = `${parsedCode.WebPages.pageName}`;
+            fileName.value = `${parsedCode.WebPages.fileName}`;
+            pageContent.value = `${parsedCode.WebPages.pageContent}`;
+        })
+  else if(url == "/admin/sections/add-new")
+    form.form-controller.form(method="POST",action="/api/v1/createsection")
+      .mb-3.container-
+        label.form-label(for='InputSectionName') Section Name
+        input#pageName.form-control(name='sectionName' , type="text")
+        label.form-label(for='InputFileName') File Name
+        input#fileName.form-control(name='fileName' , type="text")
+        label.form-label(for='InputSectionContent') Section Content - After Page Add You Can Edit in editor
+        input#pageContent.form-control(name='sectionContent' , value="h1 Hello World" , placeholder="Please Add Page First After Page Add You Can Edit" type="text")
+        button#addpages.btn.btn-success(type="submit") Add New Section
+  else if(url == "/admin/sections/update")
+    form.form-controller.form(method="POST",action=`/api/v1/updatesection/${Id}`)
+      .mb-3.container-
+        label.form-label(for='InputSectionName') Section Name
+        input#sectionName.form-control(name='sectionName' , type="text")
+        label.form-label(for='InputFileName') File Name
+        input#fileName.form-control(name='fileName' , type="text")
+        label.form-label(for='InputFileName') Section Content
+        input#sectionContent.form-control(name='sectionContent' , style="pointer-events: none;" type="text")
+        a.btn.btn-light(href=`/admin/sections/update/editor/${Id}`) Edit Section in Editor
+        br
+        button#addpages.btn.btn-success(type="submit") Update Section
+    script.
+      
+        let id= `#{Id}`;
+        fetch(`${domain}/api/v1/getsection/${id}`).then((code)=>{
+        return code.json()
+        }).then((parsedCode)=>{
+          console.log(parsedCode)
+        let fileName = document.getElementById("fileName");
+        let sectionsContent = document.getElementById("sectionContent");
+        let sectionName = document.getElementById("sectionName");
+        sectionName.value = `${parsedCode.Section.sectionName}`;
+        fileName.value = `${parsedCode.Section.fileName}`;
+        console.log(parsedCode.Section.sectionContent)
+        sectionsContent.value = `${parsedCode.Section.sectionContent}`;
+         })
+  else if(url == "/admin/sections/update/editor")
+    form.form-controller.form(method="POST",action=`/api/v1/updatesection/${Id}`)
+      .mb-3.container-fluid
+        label.form-label(for='InputPageName') Section Name
+        input#sectionName.form-control(name='sectionName' ,style="pointer-events: none;", type="text")
+        label.form-label(for='InputFileName') File Name
+        input#fileName.form-control(name='fileName' ,style="pointer-events: none;", type="text")
+        include ./editSectionContent
+        button#addpages.btn.btn-success(type="submit") Update Code
+    script.
+        let id= `#{Id}`;
+script(src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.5.3/ace.js')
+  
