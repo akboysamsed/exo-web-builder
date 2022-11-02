@@ -14,7 +14,7 @@ html
         script.
             console.log("working")
             let id= `#{Id}`;
-            fetch(`${domain}/api/v1/getsection/${id}`).then((code)=>{
+            fetch(`/api/v1/getsection/${id}`).then((code)=>{
                 return code.json()
             }).then((parsedCode)=>{
                 var aceEditor = ace.edit("editor");
