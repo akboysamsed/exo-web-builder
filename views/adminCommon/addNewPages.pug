@@ -86,7 +86,7 @@ body
     script.
       
         let id= `#{Id}`;
-        fetch(`${domain}/api/v1/getsection/${id}`).then((code)=>{
+        fetch(`/api/v1/getsection/${id}`).then((code)=>{
         return code.json()
         }).then((parsedCode)=>{
           console.log(parsedCode)
