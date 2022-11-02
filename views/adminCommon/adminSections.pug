@@ -1,6 +1,6 @@
 script.
     let WebData;
-        fetch(`${domain}/api/v1/getsections`).then((Sections)=>{
+        fetch(`/api/v1/getsections`).then((Sections)=>{
             return Sections.json()
         }).then((Sections)=>{
             WebData=Sections.getPageSection;
