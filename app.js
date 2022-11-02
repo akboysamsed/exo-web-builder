@@ -28,9 +28,7 @@ app.use(express.urlencoded());
 const staticPath = path.join(__dirname, "./public")
 app.use(express.static(staticPath))
 
-app.get("/favico.ico", function (req, res) {
-  /*code*/
-});
+
 app.route("/api/v1/getroute").get(getRoute);
 app.route("/api/v1/updateroute").post(updateRoute);
 app.route("/eg-admin").get((req,res)=>{

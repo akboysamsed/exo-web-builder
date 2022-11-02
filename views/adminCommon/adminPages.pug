@@ -1,6 +1,6 @@
 script.
     let WebData;
-        fetch(`${domain}/api/v1/getPages`).then((WebPages)=>{
+        fetch(`/api/v1/getPages`).then((WebPages)=>{
             return WebPages.json()
         }).then((WebPages)=>{
             WebData=WebPages.Pages;
