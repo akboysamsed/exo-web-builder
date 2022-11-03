@@ -75,11 +75,11 @@ exports.updateRoute = async (req, res) => {
     runValidators: true,
     useFindAndModify: true,
   });
-
-  res.status(200).json({
-    success: true,
-    Route,
-  });
+  res.redirect('back')
+  // res.status(200).json({
+  //   success: true,
+  //   Route,
+  // });
 };
 
 exports.createPage = async (req, res) => {

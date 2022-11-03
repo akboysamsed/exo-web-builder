@@ -2,7 +2,6 @@ const express = require("express");
 const WebPage = require("./models/webPageModel");
 const app = express();
 const path = require("path");
-var request = require('request');
 
 const {
   createPage,

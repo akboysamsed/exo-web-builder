@@ -28,7 +28,7 @@ block content
         script.
           let delsBtn = document.getElementById("dels")
           delsBtn.onclick =   ()=>{
-          fetch(`${domain}/api/v1/deletesection/${id}`,{ method: 'DELETE'}).then(()=>{
+          fetch(`/api/v1/deletesection/${id}`,{ method: 'DELETE'}).then(()=>{
           window.location = "/admin/sections"
           })
           }
